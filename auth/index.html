@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>todoist Authorization</title>
+</head>
+<body>
+  <h1><a href="/auth/">todoist OAuth Authorization</a></h1>
+  Steps
+  <ol start="0">
+    <li>Create todoist app</li>
+    <li><a href="/auth/step1/">The authorization request</a></li>
+    <li><a href="/auth/step2/">The redirection to your application site</a></li>
+    <li><a href="/auth/step3/">The token exchange</a></li>
+  </ol>
+
+  <h2 id="step0">Step 0: Create todoist app</h2>
+
+  Access to <a href="https://developer.todoist.com/appconsole.html" target="_blank" rel="noopener">Todoist App Management Console</a> and create a new todoist app. <br>
+  Then, please input following url to <strong>OAuth redirect URL</strong> form.
+  <br>
+  <br>
+  <code>http://127.0.0.1:8888/auth/step2/</code>
+
+  <br>
+
+  <h4>Create <code>auth.json</code> file</h4>
+  Please create <code>auth.json</code> file with following format, and put it to <code>/auth/</code> directory.
+
+  <pre><code>
+    {
+      "client_id": "your_client_id",
+      "client_sec": "your_client_secret",
+      "state": "random_string_you_like"
+    }
+  </code></pre>
+
+  <br>
+  <br>
+  next >> <a href="/auth/step1/">step 1: The authorization request</a>
+</body>
+</html>

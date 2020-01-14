@@ -1,0 +1,5 @@
+{
+  "client_id": "your-client-id",
+  "client_sec": "your-client-secret",
+  "state": "random_string_you_like"
+}

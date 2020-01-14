@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>todoist Authorization</title>
+</head>
+<body>
+  <h1><a href="/auth/">todoist OAuth Authorization</a></h1>
+
+  <h2 id="step2">step2: The redirection to your application site</h2>
+
+  Authorization request result <br>
+
+  <div id="authorize-result-err" style="color: red;"></div>
+  <p>
+    <code id="authorize-result-success"></code>
+  </p>
+
+  <br>
+  <br>
+  <div id="next-link-area" style="display: none;">
+    next >> <a href="/auth/step3/" id="next-link">step 3: The token exchange</a>
+  </div>
+
+  <script>
+    const authResErrArea = document.getElementById('authorize-result-err');
+    const authResSuccessArea = document.getElementById('authorize-result-success');
+    const nextLinkArea = document.getElementById('next-link-area');
+    const nextLink = document.getElementById('next-link');
+    const authJson = '/auth/auth.json';
+
+    window.onload = () => {
+      fetch(authJson)
+        .then(res => {
+          if (res.ok) {
+            res.json().then(json => {
+              const query = [...new URLSearchParams(location.search).entries()].reduce((obj, e) => ({...obj, [e[0]]: e[1]}), {});
+              if (typeof query.code == 'undefined' || typeof query.state == 'undefined') {
+                throw new Error(`Failed to auth: ${response.status}`);
+              }
+
+              if (query.state != json.state) {
+                throw new Error(`Failed to get authorize. Invalid value for <code>state</code>.: ${response.status}`);
+              }
+
+              authResSuccessArea.innerText = JSON.stringify(query, null, 2);
+              nextLink.setAttribute('href', `/auth/step3/?code=${query.code}`);
+              nextLinkArea.style.display = 'unset';
+            });
+          } else {
+            throw new Error(`Failed to get authorize: ${response.status}`);
+          }
+        })
+        .catch(err => {
+          authResErrArea.innerText = err + '\n Create <code>auth.json</code> and retry auth step from <strong><a href="/auth/step2/">Step2</a></strong>.';
+        });
+    }
+  </script>
+</body>
+</html>
