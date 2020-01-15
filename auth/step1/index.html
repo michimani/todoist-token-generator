@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>todoist Authorization</title>
+  <style>
+    code {
+      background-color: #eceff1;
+      padding: 2px 4px;
+      color: #37474f;
+    }
+    pre.code {
+      background-color: #fff3e0;
+      padding: 10px;
+      font-family: monospace;
+    }
+    pre.code code {
+      background-color: unset;
+      color: unset;
+      padding: 0px;
+    }
+  </style>
 </head>
 <body>
   <h1><a href="/auth/">todoist OAuth Authorization</a></h1>
@@ -13,8 +30,8 @@
 
   Please access to following link to request authorization.
 
-  <div id="authorize-link-area">
-    <code><a id="authorize-link" target="_blank" rel="noopener"></a></code>
+  <div id="authorize-link-area" style="padding: 10px;">
+    <a id="authorize-link"></a>
   </div>
 
   <script>
